@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useAuth } from "@/contexts/auth-context"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -81,6 +82,7 @@ interface ProviderLayoutProps {
 
 export function ProviderLayout({ children }: ProviderLayoutProps) {
   const pathname = usePathname()
+  const { profile, signOut } = useAuth()
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -143,8 +145,12 @@ export function ProviderLayout({ children }: ProviderLayoutProps) {
                     <User className="h-4 w-4 text-white" />
                   </div>
                   <div className="ml-3 text-left">
-                    <p className="text-sm font-medium">Provider Admin</p>
-                    <p className="text-xs text-slate-500">admin@provider.com</p>
+                    <p className="text-sm font-medium">
+                      {profile ? `${profile.first_name} ${profile.last_name}` : 'Loading...'}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {profile?.email || 'Loading...'}
+                    </p>
                   </div>
                   <ChevronDown className="ml-auto h-4 w-4" />
                 </div>
@@ -160,7 +166,7 @@ export function ProviderLayout({ children }: ProviderLayoutProps) {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out
               </DropdownMenuItem>

@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthGuard } from "@/components/auth/auth-guard"
 import { ProviderLayout } from "@/components/layouts/provider-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -107,8 +108,9 @@ const recentActivities = [
 
 export default function ProviderDashboard() {
   return (
-    <ProviderLayout>
-      <div className="p-8 space-y-8">
+    <AuthGuard requiredRole="provider_admin">
+      <ProviderLayout>
+        <div className="p-8 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -339,7 +341,8 @@ export default function ProviderDashboard() {
             </div>
           </CardContent>
         </Card>
-      </div>
-    </ProviderLayout>
+        </div>
+      </ProviderLayout>
+    </AuthGuard>
   )
 }
