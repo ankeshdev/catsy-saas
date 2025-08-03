@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
@@ -213,4 +215,3 @@ export default function SignUpPage() {
     </div>
   )
 }
-"use client"
