@@ -213,3 +213,4 @@ export default function SignUpPage() {
     </div>
   )
 }
+"use client"
