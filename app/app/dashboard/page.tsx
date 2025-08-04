@@ -1,6 +1,5 @@
 "use client"
 
-import { AuthGuard } from "@/components/auth/auth-guard"
 import { ClientLayout } from "@/components/layouts/client-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -105,9 +104,8 @@ const recentFiles = [
 
 export default function DashboardPage() {
   return (
-    <AuthGuard requiredRole="client_user">
-      <ClientLayout>
-        <div className="p-8 space-y-8">
+    <ClientLayout>
+      <div className="p-8 space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -290,8 +288,7 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
-        </div>
-      </ClientLayout>
-    </AuthGuard>
+      </div>
+    </ClientLayout>
   )
 }

@@ -3,7 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useAuth } from "@/contexts/auth-context"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -82,7 +81,6 @@ interface ClientLayoutProps {
 
 export function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname()
-  const { profile, signOut } = useAuth()
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -152,24 +150,15 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                     <User className="h-4 w-4 text-white" />
                   </div>
                   <div className="ml-3 text-left">
-                    <p className="text-sm font-medium">
-                      {profile ? `${profile.first_name} ${profile.last_name}` : 'Loading...'}
-                    </p>
-                    <p className="text-xs text-slate-500">
-                      {profile?.email || 'Loading...'}
-                    </p>
+                    <p className="text-sm font-medium">John Doe</p>
+                    <p className="text-xs text-slate-500">john@company.com</p>
                   </div>
                   <ChevronDown className="ml-auto h-4 w-4" />
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>
-                {profile?.organization_name && (
-                  <div className="text-xs text-slate-500 mb-1">{profile.organization_name}</div>
-                )}
-                My Account
-              </DropdownMenuLabel>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/app/settings">
@@ -178,7 +167,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => signOut()}>
+              <DropdownMenuItem>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out
               </DropdownMenuItem>
